@@ -1,0 +1,21 @@
+name: do sanity testing on repo
+
+on:
+  pull_request:
+  push:
+    branches: master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Get timestamp
+        shell: bash
+        run: echo "##[set-output name=timestamp;]$(env TZ=GMT date '+%Y%m%d%H%M%S')"
+        id: get_timestamp
+
+      - name: Github actor
+        shell: bash
+        run: echo ${{ github.actor }}
