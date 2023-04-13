@@ -14,10 +14,10 @@ jobs:
         run: echo "##[set-output name=timestamp;]$(env TZ=GMT date '+%Y%m%d%H%M%S')"
         id: get_timestamp
 
-      - name: Github actor
-        shell: bash
-        run: echo ${{ github.actor }}
-
       - name: Fail if PR not approved
         if: github.event.review.state != 'approved'
         run: exit 1
+
+      - name: Github actor
+        shell: bash
+        run: echo ${{ github.actor }}
