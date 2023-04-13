@@ -2,8 +2,6 @@ name: do sanity testing on repo
 
 on:
   pull_request:
-  push:
-    branches: master
 
 jobs:
   build:
@@ -19,3 +17,7 @@ jobs:
       - name: Github actor
         shell: bash
         run: echo ${{ github.actor }}
+
+      - name: Fail if PR not approved
+        if: github.event.review.state != 'approved'
+        run: exit 1
